@@ -1767,8 +1767,12 @@ static void handleAppleAuthResult(FLTFirebaseAuthPlugin *object, id arguments, F
     userData[@"tenantId"] = [NSNull null];
   }
 
-  // native does not provide refresh tokens
-  userData[@"refreshToken"] = @"";
+  // if native does not provide refresh tokens
+  if (user.refreshToken != nil) {
+    userData[@"refreshToken"] = user.refreshToken;
+  } else {
+    userData[@"refreshToken"] = @"";
+  }
   return userData;
 }
 
